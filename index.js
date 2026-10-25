@@ -21,11 +21,7 @@ let wbi = { key: '', expires: 0 };
 const streams = new Map();
 
 async function api(url, signal) {
-    let response;
-    for (let attempt = 0; ; attempt++) {
-        try { response = await fetch(url, { headers: API_HEADERS, signal }); break; }
-        catch (error) { if (signal?.aborted || attempt >= 2) throw Object.assign(new Error('连接 B站失败，请稍后再试'), { status: 502 }); await new Promise(resolve => setTimeout(resolve, 500 * (attempt + 1))); }
-    }
+    const response = await fetch(url, { headers: API_HEADERS, signal });
     const text = await response.text();
     let body;
     try { body = JSON.parse(text); } catch { throw Object.assign(new Error(`B站接口异常（HTTP ${response.status}）`), { status: 502 }); }
@@ -127,7 +123,7 @@ function fail(res, error) {
 }
 
 export async function init(router) {
-    router.get('/health', (_req, res) => res.json({ ok: true, version: '1.0.1' }));
+    router.get('/health', (_req, res) => res.json({ ok: true, version: '1.0.0' }));
     router.get('/search', async (req, res) => {
         const keyword = String(req.query.keyword || '').trim().slice(0, 100);
         const page = Math.max(1, Math.min(10, Number(req.query.page) || 1));

@@ -1,6 +1,6 @@
 {
     "name": "sillytavern-yuyin-bili",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "description": "Bilibili search and audio relay for the 余音 floating music player script.",
     "type": "module",
     "main": "index.js",

@@ -24,7 +24,19 @@ curl -fsSL https://raw.githubusercontent.com/cristiano7977/yuyin-bili/main/insta
 
 检查是否装好：浏览器打开 `http://127.0.0.1:8000/api/plugins/yuyin-bili/health`（端口按自己的改），看到 `{"ok":true,...}` 就行。
 
-## 手动安装（Windows 等）
+## 安装（Windows）
+
+在开始菜单搜「PowerShell」并打开，复制这一行运行：
+
+```powershell
+irm https://raw.githubusercontent.com/cristiano7977/yuyin-bili/main/install.ps1 | iex
+```
+
+它会在常见位置找酒馆。找不到时会让你输入酒馆文件夹路径，可以在资源管理器里右键文件夹选「复制文件路径」再粘贴进来。也可以先运行 `$env:YUYIN_ST='D:\SillyTavern'` 再运行上面那行。
+
+电脑上装了 git，插件以后会随酒馆启动自动更新。没装 git 的话，会下载压缩包安装，想更新时再运行一次这条命令就行。
+
+## 手动安装
 
 1. 在 `SillyTavern/plugins/` 里运行 `git clone https://github.com/cristiano7977/yuyin-bili`，或者下载本仓库，把文件放进 `SillyTavern/plugins/yuyin-bili/`。
 2. 打开 `SillyTavern/config.yaml`，把 `enableServerPlugins` 改成 `true`。
